@@ -1,11 +1,8 @@
 #include<cstdio>
 #include<cstring>
 #include<iostream>
-#include"helper.cpp"
 #include<chrono>
 // #include<cmath>
-// #include<fstream>
-// #include<iomanip>
 
 #include"main.h"
 
@@ -26,19 +23,23 @@ int main(int argc, char** argv){
             printf("Subtask chosen is %s\n", subtask);
             if (!strcmp(subtask, "fullyconnected")) {
                 if (argc == 7) {
-                    // argv[2] -> mkl/openblas/pthreads
+                    // argv[2] -> mkl/openblas/pthreads/normal
                     if (!strcmp(argv[2], "mkl")) {
                         fc_mkl(argv[3],argv[4],argv[5],argv[6]);
                     } 
-                    // else if (!strcmp(argv[2], "blas")) {
-                    //     fc_blas(argv[3],argv[4],argv[5],argv[6]);
-                    // }
-                    // if (!strcmp(argv[2], "pthread")) {
-                    //     fc_pthread(argv[3],argv[4],argv[5],argv[6]);
-                    // }
+                    else if (!strcmp(argv[2], "blas")) {
+                        fc_blas(argv[3],argv[4],argv[5],argv[6]);
+                    }
+                    else if (!strcmp(argv[2], "pthread")) {
+                        fc_pthread(argv[3],argv[4],argv[5],argv[6]);
+                    }
                     else{
                         printf("undefined fc parameter\n");
                     }
+                }
+                else if (argc == 6) {
+                    // normal fullyconnected
+                    fc_mkl(argv[2],argv[3],argv[4],argv[5]);
                 }
                 else {
                     // raise error
