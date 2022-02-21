@@ -5,7 +5,8 @@
 using namespace std;
 
 struct argss {
-    int i;
+    int istart;
+    int iend;
     int minp;
     int nin;
     float **a;
@@ -13,29 +14,34 @@ struct argss {
     float **bias;
     float **outm;
 };
+int PTHREAD = 8;
 
 void* multiply_vectors(void* arguments) {
     struct argss* args = (struct argss*) arguments;
     // cout << "In thread!!" << pthread_self() <<'\n';  
     // float* a = new float[args->minp];  
     // cout << "reached " << pthread_self() <<'\n';
-    for(int j = 0; j < args->minp; j++) {
-        args->outm[args->i][j] = 0.0;
-        // cout << "For outm " << args->i <<' ' << j <<'\n';
-        for(int k = 0; k < args->nin; k++) {
-            // cout << pthread_self() << " " << j << " " << k <<'\n';
-            
-            float x = 0.0;
-            x = (args->a[k][j] * args->b[args->i][k]);
-            // cout << "For outm " << args->i <<' ' << j << ' ' << k << ' '<< args->a[k][j] << ' ' << args->b[args->i][k] << " earlier " << args->outm[args->i][j] <<'\n';
-            args->outm[args->i][j] += x;
-            // cout << "For outm " << args->i <<' ' << j << ' ' << k << ' '<< args->a[k][j] << ' ' << args->b[args->i][k] << " later " << args->outm[args->i][j] <<'\n';
+    for (int y = args->istart; y < args->iend; y++) {
+        for(int j = 0; j < args->minp; j++) {
+            args->outm[y][j] = 0.0;
+            double sum = 0.0;
+            // cout << "For outm " << args->i <<' ' << j <<'\n';
+            for(int k = 0; k < args->nin; k++) {
+                // cout << pthread_self() << " " << j << " " << k <<'\n';
+                
+                // double x = 0.0;
+                sum += (args->a[k][j] * args->b[y][k]);
+                // cout << "For outm " << args->i <<' ' << j << ' ' << k << ' '<< args->a[k][j] << ' ' << args->b[args->i][k] << " earlier " << args->outm[args->i][j] <<'\n';
+                // args->outm[y][j] += x;
+                // cout << "For outm " << args->i <<' ' << j << ' ' << k << ' '<< args->a[k][j] << ' ' << args->b[args->i][k] << " later " << args->outm[args->i][j] <<'\n';
+            }
+            // cout << "For outm " << args->i <<' ' << j << ' '<< " earlier " << args->outm[args->i][j] <<'\n';
+            args->outm[y][j] = (float)sum;
+            args->outm[y][j] += args->bias[y][j];
+            // cout << "For outm " << args->i <<' ' << j << ' '<< " later " << args->outm[args->i][j] <<'\n';
         }
-        // cout << "For outm " << args->i <<' ' << j << ' '<< " earlier " << args->outm[args->i][j] <<'\n';
-        args->outm[args->i][j] += args->bias[args->i][j];
-        // cout << "For outm " << args->i <<' ' << j << ' '<< " later " << args->outm[args->i][j] <<'\n';
+        // cout << "Bye-Bye " << pthread_self() <<'\n';
     }
-    // cout << "Bye-Bye " << pthread_self() <<'\n';
     pthread_exit(NULL);
     return NULL;
 }
@@ -159,16 +165,18 @@ void fc_pthread(char* inputm, char* weightm, char* biasm, char* outputm) {
     }
     // cout << "Inputs done!" << '\n';
 
-    struct argss arg[nw];
+    struct argss arg[PTHREAD];
 
-    pthread_t tarr[nw];
-    for (int i = 0; i < nw; i++) {        
+    pthread_t tarr[PTHREAD];
+    int x = (nw%PTHREAD == 0)?(nw/PTHREAD):(nw/PTHREAD+1);
+    for (int i = 0; i < PTHREAD; i++) {        
         arg[i].a = inmatrix;
         arg[i].b = wmatrix;
         arg[i].bias = bmatrix;
         arg[i].outm = outmatrix;
         arg[i].minp = minp;
-        arg[i].i = i;
+        arg[i].istart = i*x;
+        arg[i].iend = ((i+1)*x > nw)?nw:((i+1)*x);
         arg[i].nin = nin;
         pthread_create(&tarr[i], NULL, &multiply_vectors, &arg[i]);
     }
@@ -193,11 +201,14 @@ void fc_pthread(char* inputm, char* weightm, char* biasm, char* outputm) {
         cout << "Error sending output to output file\n";
         exit(1);
     }
-    
-    for (int i = 0; i < nw; i++) {
-        pthread_join(tarr[i], NULL);
-        // cout << "thread joined " << i << '\n';
-        // float* oans = (float*) ans;
+
+    // cout << "here" <<'\n';
+    for (int i = 0; i < PTHREAD; i++) {
+        pthread_join(tarr[i], NULL);  
+    }
+    // cout << "hereagain\n";
+
+    for (int i = 0; i < nw; i++) {  
         for (int j = 0; j < minp; j++) {
             // file << std::fixed << std::setprecision(5) << omatrix[i] << "\n";
             if (!(fout << std::fixed << std::setprecision(7) << outmatrix[i][j])) {
@@ -208,8 +219,29 @@ void fc_pthread(char* inputm, char* weightm, char* biasm, char* outputm) {
                 std::cout << "Error sending output to output file\n";
                 exit(1);
             }            
-        }
+        }    
     }
+    
+    // for (int p = 0; p < PTHREAD; p++) {
+    //     pthread_join(tarr[p], NULL);
+    //     for (int i = 0; i < nw; i++) {
+            
+    //         // cout << "thread joined " << i << '\n';
+    //         // float* oans = (float*) ans;
+    //         for (int j = 0; j < minp; j++) {
+    //             // file << std::fixed << std::setprecision(5) << omatrix[i] << "\n";
+    //             if (!(fout << std::fixed << std::setprecision(7) << outmatrix[i][j])) {
+    //                 std::cout << "Error sending output to output file\n";
+    //                 exit(1);
+    //             }
+    //             if (!(fout << '\n')) {
+    //                 std::cout << "Error sending output to output file\n";
+    //                 exit(1);
+    //             }            
+    //         }
+    //     }
+    // }
+    
 
     // cout << "Fully connected layer implementation complete successfully. Output is at " << outputm <<'\n';    
     delete[] inmatrix;
