@@ -3,5 +3,5 @@
 #include <fstream>
 #include <iostream>
 
-void fc_pthread(char* inputm, char* weightm, char* biasm, char* outputm);
+void fc(char* inputm, char* weightm, char* biasm, char* outputm);
 

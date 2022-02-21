@@ -61,6 +61,6 @@ void fc(char* im, char* wm, char* bm, char* om) {
         printf("Output matrix not generated.\n");
         exit(1);
     }
-    // printmatrix(omatrix);
+    printmatrix(omatrix);
     tofile(omatrix, om);
 }

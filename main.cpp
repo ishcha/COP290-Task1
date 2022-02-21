@@ -1,21 +1,16 @@
 #include<cstdio>
 #include<cstring>
 #include<iostream>
-#include<chrono>
+// #include<chrono>
 // #include<cmath>
 
 #include"main.h"
 
 int main(int argc, char** argv){
 
-    // int num = 11; // number of runs to average over;
-    // double arr[10];
-    // double avg = 0.0;
-    // std::fstream file;
-    // file.open("Run_results_pthreads.txt", std::ios::app);
+    // int num = 11;
     // while(num) {
-        // std::cout<<num<<"\n";
-        auto begin = std::chrono::high_resolution_clock::now();
+        // auto begin = std::chrono::high_resolution_clock::now();
         if (argc == 1)
             printf("No subtask given. Choose one from fullyconnected, activation, pooling or probability.\n");
         else {
@@ -24,24 +19,24 @@ int main(int argc, char** argv){
             if (!strcmp(subtask, "fullyconnected")) {
                 if (argc == 7) {
                     // argv[2] -> mkl/openblas/pthreads/normal
+                    printf("Performing matrix multiplication using %s\n", argv[2]);
                     if (!strcmp(argv[2], "mkl")) {
                         fc_mkl(argv[3],argv[4],argv[5],argv[6]);
                     } 
                     else if (!strcmp(argv[2], "blas")) {
+
                         fc_blas(argv[3],argv[4],argv[5],argv[6]);
                     }
                     else if (!strcmp(argv[2], "pthread")) {
                         fc_pthread(argv[3],argv[4],argv[5],argv[6]);
                     }
-                    else if (!strcmp(argv[2], "simple")) {
-                        fc(argv[3],argv[4],argv[5],argv[6]);
-                    }
                     else{
-                        printf("undefined fc parameter\n");
+                        printf("Undefined matrix multiplication parameter. Choose one from mkl, blas, pthread\n");
                     }
                 }
                 else if (argc == 6) {
                     // normal fullyconnected
+                    printf("Performing conventional matrix multiplication \n");
                     fc_mkl(argv[2],argv[3],argv[4],argv[5]);
                 }
                 else {
@@ -85,17 +80,11 @@ int main(int argc, char** argv){
                 printf("Invalid subtask chosen. Choose one of fullyconnected, activation, pooling or probability.\n");
             }
         }
-        auto end = std::chrono::high_resolution_clock::now();
-        auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
-        double duration = (1e-6 * (std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin)).count());
-        // if (num == 11) {
-        //     num--;
-        //     continue;
-        // }
+        // auto end = std::chrono::high_resolution_clock::now();
+        // auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
+        // double duration = (1e-6 * (std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin)).count());
         // num--;
         // std::cout<<duration <<"\n";
-        // avg += duration;
-        // arr[num] = duration;
     // }
     // avg = avg/10.0;
     // std::cout<<"Mean time taken is: "<< avg <<"\n";

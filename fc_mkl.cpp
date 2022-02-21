@@ -1,10 +1,3 @@
-// '''
-// g++ -o main main.o fc_mkl.o -fopenmp 
-// -m64 -I${MKLROOT}/include -Wl,--no-as-needed 
-// -L${MKLROOT}/lib/intel64 -lmkl_intel_lp64 
-// -lmkl_core -lmkl_gnu_thread -lpthread -lm -ldl
-// '''
-
 #include <cstdio>
 #include <iostream>
 #include <cstdlib>
@@ -41,11 +34,15 @@ void fc_mkl(char* im, char* wm, char* bm, char* om) {
       exit(1);
   }
   file.close();
-
+  int k1;
   file.open(wm, std::ios::in);
   if (file) {
     file >> n;
-    file >> k;
+    file >> k1;
+    if (k1 != k) {
+      printf( "\n ERROR: Matrix dimensions do not align. Exiting...\n");
+      exit(1);
+    }
     B = (float*) mkl_malloc(n*k*sizeof(float), 32);
     if (B == NULL) {
       printf( "\n ERROR: Can't allocate memory for matrix. Exiting...\n");
@@ -62,10 +59,15 @@ void fc_mkl(char* im, char* wm, char* bm, char* om) {
   }
   file.close();
 
+  int m1,n1;
   file.open(bm, std::ios::in);
   if (file) {
-    file >> n;
-    file >> m;
+    file >> n1;
+    file >> m1;
+    if (m1 != m && n1 != n) {
+      printf( "\n ERROR: Matrix dimensions do not align. Exiting...\n");
+      exit(1);
+    }
     C = (float*) mkl_malloc(m*n*sizeof(float), 32);
     if (C == NULL) {
       printf( "\n ERROR: Can't allocate memory for matrix. Exiting...\n");
@@ -98,7 +100,6 @@ void fc_mkl(char* im, char* wm, char* bm, char* om) {
 
   for(i=0; i<m*n; i++) {
     omatrix[i] += C[i];
-    // printf("%f\n", omatrix[i]);
   }
 
   file.open(om, std::ios::out);

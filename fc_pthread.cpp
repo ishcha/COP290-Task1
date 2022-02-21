@@ -1,6 +1,6 @@
 #include <pthread.h>
-#include "fc_pthread.h"
 #include <iomanip>
+#include "fc_pthread.h"
 
 using namespace std;
 
@@ -17,6 +17,7 @@ struct argss {
 void* multiply_vectors(void* arguments) {
     struct argss* args = (struct argss*) arguments;
     // cout << "In thread!!" << pthread_self() <<'\n';  
+    // float* a = new float[args->minp];  
     // cout << "reached " << pthread_self() <<'\n';
     for(int j = 0; j < args->minp; j++) {
         args->outm[args->i][j] = 0.0;
@@ -111,6 +112,7 @@ void fc_pthread(char* inputm, char* weightm, char* biasm, char* outputm) {
     // taking input for input matrix
     for (int i = 0; i < nin; i++) {
         for (int j = 0; j < minp; j++) {
+            // float x;
             if(!(fin >> inmatrix[i][j])) {
                 cout << "Error! Input file does not have enough matrix entries\n";
                 exit(1);
@@ -121,6 +123,7 @@ void fc_pthread(char* inputm, char* weightm, char* biasm, char* outputm) {
     // taking input for weight matrix
     for (int i = 0; i < nw; i++) {
         for (int j = 0; j < mw; j++) {
+            // float x;
             if(!(fw >> wmatrix[i][j])) {
                 cout << "Error! Weight file does not have enough matrix entries\n";
                 exit(1);
@@ -131,6 +134,7 @@ void fc_pthread(char* inputm, char* weightm, char* biasm, char* outputm) {
     // taking input for bias matrix
     for (int i = 0; i < nb; i++) {
         for (int j = 0; j < mb; j++) {
+            // float x;
             if(!(fb >> bmatrix[i][j])) {
                 cout << "Error! Bias file does not have enough matrix entries\n";
                 exit(1);
@@ -195,7 +199,8 @@ void fc_pthread(char* inputm, char* weightm, char* biasm, char* outputm) {
         // cout << "thread joined " << i << '\n';
         // float* oans = (float*) ans;
         for (int j = 0; j < minp; j++) {
-            if (!(fout <<std::fixed << std::setprecision(7) << outmatrix[i][j])) {
+            // file << std::fixed << std::setprecision(5) << omatrix[i] << "\n";
+            if (!(fout << std::fixed << std::setprecision(7) << outmatrix[i][j])) {
                 std::cout << "Error sending output to output file\n";
                 exit(1);
             }
