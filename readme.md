@@ -44,7 +44,7 @@ The matrix multiplication operation in the Fully connected forward computation h
 # Description
 ## Fully connected forward computation
 - **Functionality implemented**: output_matrix = input_matrix*weight_matrix + bias_matrix
-###  implementation
+### Simple for-loop implementation
 - **Name of the function**: fc; defined in fullyconnected.cpp
 - **Inputs**: path of file containing input matrix (AxB dimensions) with 32-bit floats, path of file containing weight matrix (BxC dimensions) with 32-bit floats, path of file containing bias matrix (AxC dimensions) with 32-bit floats, path of file to write output matrix (AxC dimensions) with 32-bit floats, all written in specified matrix format
 - **Usage (Command line instruction)**: ./yourcode.out fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt (only 6 arguments, no extra arguments for to support the _fullyconnected_ argument information).
