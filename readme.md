@@ -137,6 +137,6 @@ In mkl, openblas and the normal (simple) implementation only 1 core dips down in
 ## Inferences
 - Looking at the GNU plots, we can infer that our implementations of MKL, OpenBLAS and pthreads-based fullyconnected forward computation outperform our simple for-loop based implementation, as expected.
 - Our pthreads-based implementation is comparable in performance to the implementations based on MKL and OpenBLAS, thus validating our multi-threading approach.
-- Our pthreads implementation gives nearly 3x improvement in runtime latency, when compared with the simple for-loop implementation.
-- MKL and OpenBLAS give nearly 6x and 4x improvements in runtime latencies respectively, when compared with the simple for-loop implementation. 
+- Our pthreads implementation gives nearly 3x improvement in runtime latency, when compared with the simple for-loop implementation. (reference: 900x900 matrix multiplication)
+- MKL and OpenBLAS give nearly 6x and 4x improvements in runtime latencies respectively, when compared with the simple for-loop implementation. (reference: 900x900 matrix multiplication)
 - Pthreads implementation makes the maximum distributed usage of the CPU cores, which is indicated by the CPU usage patterns. 
