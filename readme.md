@@ -117,3 +117,6 @@ The matrix multiplication operation in the Fully connected forward computation h
 
 ## CPU specifications and CPU usage 
 The following CPU usage patterns were observed while running pthread-based implementation. 
+
+## Inferences
+- Looking at the GNU plots, we can infer that our implementations of simple and MKL-based fullyconnected forward computation outperform our OpenBLAS and pthreads-based implementations. 
