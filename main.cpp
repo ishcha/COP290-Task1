@@ -36,8 +36,8 @@ int main(int argc, char** argv){
                 }
                 else if (argc == 6) {
                     // normal fullyconnected
-                    // printf("Performing conventional matrix multiplication \n");
-                    fc_mkl(argv[2],argv[3],argv[4],argv[5]);
+                    printf("Performing conventional matrix multiplication \n");
+                    fc(argv[2],argv[3],argv[4],argv[5]);
                 }
                 else {
                     // raise error
