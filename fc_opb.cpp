@@ -55,8 +55,20 @@ void fc_blas( char* inputm, char* weightm, char* biasm, char* outputm) {
         exit(1);
     }
 
-    float inmatrix[minp*nin], wmatrix[mw*nw], bmatrix[mb*nb], outmatrix[mb*nb];
+    float *inmatrix, *wmatrix, *bmatrix, *outmatrix;
+    inmatrix = new float[minp*nin];
+    wmatrix = new float[mw*nw];
+    bmatrix = new float[mb*nb];
+    outmatrix = new float[mb*nb];
 
+    if (inmatrix == NULL || outmatrix == NULL || wmatrix == NULL || bmatrix == NULL) {
+        printf( "\n ERROR: Can't allocate memory for matrix. Exiting...\n");
+        delete[] inmatrix;
+        delete[] wmatrix;
+        delete[] bmatrix;
+        delete[] outmatrix;
+        exit(1);
+    }
 
     // taking input for input matrix
     for (int i = 0; i < nin; i++) {
@@ -142,4 +154,8 @@ void fc_blas( char* inputm, char* weightm, char* biasm, char* outputm) {
     fw.close();
     fb.close();
     fin.close();
+    delete[] inmatrix;
+    delete[] wmatrix;
+    delete[] bmatrix;
+    delete[] outmatrix;
 }

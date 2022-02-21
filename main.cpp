@@ -30,16 +30,13 @@ int main(int argc, char** argv){
                     else if (!strcmp(argv[2], "pthread")) {
                         fc_pthread(argv[3],argv[4],argv[5],argv[6]);
                     }
-                    else if (!strcmp(argv[2], "simple")) {
-                        fc(argv[3],argv[4],argv[5],argv[6]);
-                    }
                     else{
                         printf("Undefined matrix multiplication parameter. Choose one from mkl, blas, pthread\n");
                     }
                 }
                 else if (argc == 6) {
                     // normal fullyconnected
-                    printf("Performing conventional matrix multiplication \n");
+                    // printf("Performing conventional matrix multiplication \n");
                     fc_mkl(argv[2],argv[3],argv[4],argv[5]);
                 }
                 else {
@@ -83,11 +80,11 @@ int main(int argc, char** argv){
                 printf("Invalid subtask chosen. Choose one of fullyconnected, activation, pooling or probability.\n");
             }
         }
-        // auto end = std::chrono::high_resolution_clock::now();
-        // auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
-        // double duration = (1e-6 * (std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin)).count());
-        // num--;
-        // std::cout<<duration <<"\n";
+    //     auto end = std::chrono::high_resolution_clock::now();
+    //     auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
+    //     double duration = (1e-6 * (std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin)).count());
+    //     num--;
+    //     std::cout<<duration <<"\n";
     // }
     // avg = avg/10.0;
     // std::cout<<"Mean time taken is: "<< avg <<"\n";

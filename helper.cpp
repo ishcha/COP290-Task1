@@ -2,7 +2,7 @@
 #include<cstdio>
 #include<cstring>
 #include<vector>
-#include<iomanip>
+
 #include"helper.h"
 
 
@@ -20,10 +20,12 @@ std::vector<std::vector<float> > readmatrix(char* input) {
                 file >> matrix[j][i];
             }
         }
+        file.close();
         return matrix;
     }
     else {
         printf("File: %s does not exist.\n", input);
+        file.close();
         exit(1);
     }
 }
@@ -35,9 +37,10 @@ void tofile(std::vector<std::vector<float> > omatrix, char* output) {
     file << c1 << "\n" << r1 << "\n";
     for(int i=0; i<c1; i++){
         for(int j=0; j<r1; j++){
-            file << std::fixed << std::setprecision(7) << omatrix[j][i] << "\n";
+            file << omatrix[j][i] << "\n";
         }
     }
+    file.close();
     return;
 }
 
@@ -61,10 +64,12 @@ std::vector<float> readvector(char* input) {
         for(int i=0; i<size; i++) {
             file >> vec[i];
         }
+        file.close();
         return vec;
     }
     else {
         printf("File: %s does not exist.\n", input);
+        file.close();
         exit(1);
     }
 }
@@ -77,6 +82,7 @@ void tofilevector(std::vector<float> ovector, char* output) {
     for(int i=0; i<size; i++){
         file << ovector[i] << "\n";
     }
+    file.close();
     return;
 }
 
