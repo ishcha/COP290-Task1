@@ -114,3 +114,6 @@ The matrix multiplication operation in the Fully connected forward computation h
 
 ### Pthread based implementation
 <img src="./gnuplots/pthread.png" alt="pthread" />
+
+## CPU specifications and CPU usage 
+The following CPU usage patterns were observed while running pthread-based implementation. 
