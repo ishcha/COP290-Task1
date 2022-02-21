@@ -104,10 +104,10 @@ The matrix multiplication operation in the Fully connected forward computation h
 # Analysis of runtime of various _fullyconnected computation_ implementations
 ## GNU plots obtained
 ### Simple O($n^3$) for-loop based implementation
-<img src="./gnuplots/simple.png" alt="Simple" />
+<img src="./gnuplots/normal.png" alt="Simple" />
 
 ### MKL based implementation
-<img src="./gnuplots/mkl.png" alt="MKL" />
+<img src="./gnuplots/MKL.png" alt="MKL" />
 
 ### OpenBLAS based implementation
 <img src="./gnuplots/openblas.png" alt="OpenBLAS" />
