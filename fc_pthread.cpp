@@ -212,8 +212,11 @@ void fc_pthread(char* inputm, char* weightm, char* biasm, char* outputm) {
     }
 
     // cout << "Fully connected layer implementation complete successfully. Output is at " << outputm <<'\n';    
-
-    fout.close();
+    delete[] inmatrix;
+    delete[] wmatrix;
+    delete[] bmatrix;
+    delete[] outmatrix;
+    fout.close();   
     fw.close();
     fb.close();
     fin.close();
