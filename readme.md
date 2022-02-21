@@ -133,3 +133,4 @@ In mkl, openblas and the normal (simple) implementation only 1 core dips down in
 
 ## Inferences
 - Looking at the GNU plots, we can infer that our implementations of simple and MKL-based fullyconnected forward computation outperform our OpenBLAS and pthreads-based implementations. 
+- Pthreads implementation makes the maximum distributed usage of the CPU cores, which is indicated by the CPU usage patterns. 
