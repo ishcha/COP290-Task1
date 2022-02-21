@@ -43,29 +43,26 @@ The matrix multiplication operation in the Fully connected forward computation h
 
 # Description
 ## Fully connected forward computation
+- **Functionality implemented**: output_matrix = input_matrix*weight_matrix + bias_matrix
 ###  implementation
 - **Name of the function**: fc; defined in fullyconnected.cpp
 - **Inputs**: path of file containing input matrix (AxB dimensions) with 32-bit floats, path of file containing weight matrix (BxC dimensions) with 32-bit floats, path of file containing bias matrix (AxC dimensions) with 32-bit floats, path of file to write output matrix (AxC dimensions) with 32-bit floats, all written in specified matrix format
 - **Usage (Command line instruction)**: ./yourcode.out fullyconnected inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt (only 6 arguments, no extra arguments for to support the _fullyconnected_ argument information).
-- **Functionality implemented**: output_matrix = input_matrix*weight_matrix + bias_matrix
 
 ### MKL implementation
 - **Name of the function**: fc_mkl; defined in fc_mkl.cpp
 - **Inputs**: path of file containing input matrix (AxB dimensions) with 32-bit floats, path of file containing weight matrix (BxC dimensions) with 32-bit floats, path of file containing bias matrix (AxC dimensions) with 32-bit floats, path of file to write output matrix (AxC dimensions) with 32-bit floats, all written in specified matrix format
 - **Usage (Command line instruction)**: ./yourcode.out fullyconnected **mkl** inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt 
-- **Functionality implemented**: output_matrix = input_matrix*weight_matrix + bias_matrix
 
 ### OpenBLAS implementation
 - **Name of the function**: fc_blas; defined in fc_opb.cpp
 - **Inputs**: path of file containing input matrix (AxB dimensions) with 32-bit floats, path of file containing weight matrix (BxC dimensions) with 32-bit floats, path of file containing bias matrix (AxC dimensions) with 32-bit floats, path of file to write output matrix (AxC dimensions) with 32-bit floats, all written in specified matrix format
 - **Usage (Command line instruction)**: ./yourcode.out fullyconnected **blas** inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt 
-- **Functionality implemented**: output_matrix = input_matrix*weight_matrix + bias_matrix
 
 ### pthread implementation
 - **Name of the function**: fc_pthread; defined in fc_pthread.cpp
 - **Inputs**: path of file containing input matrix (AxB dimensions) with 32-bit floats, path of file containing weight matrix (BxC dimensions) with 32-bit floats, path of file containing bias matrix (AxC dimensions) with 32-bit floats, path of file to write output matrix (AxC dimensions) with 32-bit floats, all written in specified matrix format
 - **Usage (Command line instruction)**: ./yourcode.out fullyconnected **pthread** inputmatrix.txt weightmatrix.txt biasmatrix.txt outputmatrix.txt 
-- **Functionality implemented**: output_matrix = input_matrix*weight_matrix + bias_matrix
 
 ## Activation functions
 ### ReLU (Rectified Linear unit)
@@ -138,5 +135,8 @@ We also observed CPU usage in case of the mkl implementation as shown in the bel
 In mkl, openblas and the normal (simple) implementation only 1 core dips down in %idle time and then it becomes normal again.
 
 ## Inferences
-- Looking at the GNU plots, we can infer that our implementations of simple and MKL-based fullyconnected forward computation outperform our OpenBLAS and pthreads-based implementations. 
+- Looking at the GNU plots, we can infer that our implementations of MKL, OpenBLAS and pthreads-based fullyconnected forward computation outperform our simple for-loop based implementation, as expected.
+- Our pthreads-based implementation is comparable in performance to the implementations based on MKL and OpenBLAS, thus validating our multi-threading approach.
+- Our pthreads implementation gives nearly 3x improvement in runtime latency, when compared with the simple for-loop implementation.
+- MKL and OpenBLAS give nearly 6x and 4x improvements in runtime latencies respectively, when compared with the simple for-loop implementation. 
 - Pthreads implementation makes the maximum distributed usage of the CPU cores, which is indicated by the CPU usage patterns. 
