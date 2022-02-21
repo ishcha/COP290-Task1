@@ -7,3 +7,4 @@ void fc_mkl(char* im, char* wm, char* bm, char* om);
 void fc_pthread(char* im, char* wm, char* bm, char* om);
 
 void fc_blas(char* im, char *wm, char* bm, char* om);
+void fc(char* im, char *wm, char* bm, char* om);

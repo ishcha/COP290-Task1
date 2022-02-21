@@ -30,6 +30,9 @@ int main(int argc, char** argv){
                     else if (!strcmp(argv[2], "pthread")) {
                         fc_pthread(argv[3],argv[4],argv[5],argv[6]);
                     }
+                    else if (!strcmp(argv[2], "simple")) {
+                        fc(argv[3],argv[4],argv[5],argv[6]);
+                    }
                     else{
                         printf("Undefined matrix multiplication parameter. Choose one from mkl, blas, pthread\n");
                     }

@@ -2,7 +2,7 @@
 #include<cstdio>
 #include<cstring>
 #include<vector>
-
+#include<iomanip>
 #include"helper.h"
 
 
@@ -35,7 +35,7 @@ void tofile(std::vector<std::vector<float> > omatrix, char* output) {
     file << c1 << "\n" << r1 << "\n";
     for(int i=0; i<c1; i++){
         for(int j=0; j<r1; j++){
-            file << omatrix[j][i] << "\n";
+            file << std::fixed << std::setprecision(7) << omatrix[j][i] << "\n";
         }
     }
     return;
