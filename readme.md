@@ -116,7 +116,20 @@ The matrix multiplication operation in the Fully connected forward computation h
 <img src="./gnuplots/pthread.png" alt="pthread" />
 
 ## CPU specifications and CPU usage 
-The following CPU usage patterns were observed while running pthread-based implementation. 
+The following CPU usage patterns were observed while running pthread-based implementation. We performed these tests on an intel x86_64 architecture with 8 cores. These were the CPU usage statistics we obtained after running our pthreads implementation on a 800x800 dimension matrix. 
+<img src="./mpstat1.png" alt="pthread cpu stats" />
+<img src="./mpstat2.png" alt="pthread cpu stats" />
+As can be seen, before the function call most of the cores wer idle with a total of 96.73% idle. Once the command was run the idle time per cpu dropped and the total went down to 58%. After that it again increased and went up to 98.75%. This shows how the different threads ran on different cores (by the %idle time). 
+We also observed CPU usage in case of the normal implementation as shown in the below figure.
+<img src="./normalstats1.png" alt="simple cpu stats" />
+<img src="./normalstats2.png" alt="simple cpu stats" />
+We also observed CPU usage in case of the openblas implementation as shown in the below figure.
+<img src="./blasstats1.png" alt="openblas cpu stats" />
+<img src="./blasstats2.png" alt="openblas cpu stats" />
+We also observed CPU usage in case of the mkl implementation as shown in the below figure.
+<img src="./mklstats1.png" alt="mkl cpu stats" />
+<img src="./mklstats2.png" alt="mkl cpu stats" />
+In mkl, openblas and the normal (simple) implementation only 1 core dips down in %idle time and then it becomes normal again.
 
 ## Inferences
 - Looking at the GNU plots, we can infer that our implementations of simple and MKL-based fullyconnected forward computation outperform our OpenBLAS and pthreads-based implementations. 
