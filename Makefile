@@ -5,6 +5,7 @@
 CC = g++
 CFLAGS = -g -Wall
 OPBROOT = /home/dell/Documents/cop290/redo/audio_processing_lib/openblas
+# OPBROOT = /home/lenovo/SEM8/COP290/A1/openblas
 MKLROOT = /opt/intel/compilers_and_libraries_2018.2.199/linux/mkl
 MKLFLAGS = -fopenmp -m64 -I${MKLROOT}/include -Wl,--no-as-needed -L${MKLROOT}/lib/intel64 -lmkl_intel_lp64 -lmkl_core -lmkl_gnu_thread -lpthread -lm -ldl
 OPBFLAGS = -I${OPBROOT}/include -L${OPBROOT}/lib -lopenblas -lpthread -lgfortran
