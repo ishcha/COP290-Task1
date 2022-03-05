@@ -1,0 +1,5 @@
+1. read weights, biases => copy in a file 
+	1. row major
+2. MKL: row-major, dims change
+3. MKL code: input-output modify
+4. Relu expects 

@@ -1,0 +1,1 @@
+./mfcc_features/aac5b7c1_nohash_0.txt up 0.89861 off 0.094898 unknown 0.0022622 

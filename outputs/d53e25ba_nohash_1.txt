@@ -1,0 +1,1 @@
+./mfcc_features/d53e25ba_nohash_1.txt left 0.99998 yes 1.0426e-05 unknown 5.5723e-06 

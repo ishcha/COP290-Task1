@@ -1,0 +1,1 @@
+./mfcc_features/c9b5ff26_nohash_4.txt on 0.99988 unknown 6.8201e-05 off 5.4271e-05 

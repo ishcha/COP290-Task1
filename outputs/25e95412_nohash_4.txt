@@ -1,0 +1,1 @@
+./mfcc_features/25e95412_nohash_4.txt up 0.99832 off 0.001636 on 1.9216e-05 

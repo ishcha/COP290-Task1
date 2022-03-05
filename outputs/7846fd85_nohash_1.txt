@@ -1,0 +1,1 @@
+./mfcc_features/7846fd85_nohash_1.txt off 0.9999 on 7.0475e-05 up 2.0533e-05 

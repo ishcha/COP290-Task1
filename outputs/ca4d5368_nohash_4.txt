@@ -1,0 +1,1 @@
+./mfcc_features/ca4d5368_nohash_4.txt stop 1 unknown 4.5745e-07 go 4.2158e-08 

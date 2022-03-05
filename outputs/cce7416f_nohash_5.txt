@@ -1,0 +1,1 @@
+./mfcc_features/cce7416f_nohash_5.txt right 0.99992 unknown 8.3547e-05 left 9.1978e-08 

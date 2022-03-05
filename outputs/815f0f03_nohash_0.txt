@@ -1,0 +1,1 @@
+./mfcc_features/815f0f03_nohash_0.txt no 0.92691 down 0.045327 go 0.027435 

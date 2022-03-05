@@ -1,0 +1,1 @@
+./mfcc_features/ba676390_nohash_0.txt left 0.99999 right 7.7824e-06 unknown 7.3579e-07 

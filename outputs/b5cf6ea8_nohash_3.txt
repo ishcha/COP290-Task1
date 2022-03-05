@@ -1,0 +1,1 @@
+./mfcc_features/b5cf6ea8_nohash_3.txt yes 1 unknown 2.6428e-06 left 1.5323e-06 

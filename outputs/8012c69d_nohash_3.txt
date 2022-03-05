@@ -1,0 +1,1 @@
+./mfcc_features/8012c69d_nohash_3.txt left 0.99974 right 0.00018714 yes 7.0892e-05 

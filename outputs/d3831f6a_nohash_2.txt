@@ -1,0 +1,1 @@
+./mfcc_features/d3831f6a_nohash_2.txt on 0.99999 unknown 1.3302e-05 off 2.462e-07 

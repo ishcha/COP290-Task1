@@ -1,0 +1,1 @@
+./mfcc_features/d9b8fab2_nohash_1.txt up 0.68208 off 0.26303 unknown 0.038563 

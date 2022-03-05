@@ -1,0 +1,1 @@
+./mfcc_features/db9cd41d_nohash_0.txt right 0.94589 unknown 0.053986 on 9.9386e-05 

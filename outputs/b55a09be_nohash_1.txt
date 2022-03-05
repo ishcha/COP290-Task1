@@ -1,0 +1,1 @@
+./mfcc_features/b55a09be_nohash_1.txt stop 0.96297 up 0.01558 off 0.012341 

@@ -1,0 +1,1 @@
+./mfcc_features/b2ae3928_nohash_1.txt no 0.96729 go 0.028934 down 0.0037398 

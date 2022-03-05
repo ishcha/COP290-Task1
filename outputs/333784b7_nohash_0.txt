@@ -1,0 +1,1 @@
+./mfcc_features/333784b7_nohash_0.txt yes 0.99374 left 0.006256 unknown 1.2339e-06 

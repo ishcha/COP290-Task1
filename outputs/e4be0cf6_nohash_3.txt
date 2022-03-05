@@ -1,0 +1,1 @@
+./mfcc_features/e4be0cf6_nohash_3.txt off 0.83961 up 0.082476 on 0.076786 

@@ -1,0 +1,1 @@
+./mfcc_features/3c257192_nohash_3.txt stop 0.99998 up 1.9714e-05 off 2.7732e-06 

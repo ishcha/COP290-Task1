@@ -1,0 +1,1 @@
+./mfcc_features/879a2b38_nohash_1.txt go 0.99311 no 0.0068433 unknown 3.4012e-05 

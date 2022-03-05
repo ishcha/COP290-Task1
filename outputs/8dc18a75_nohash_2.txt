@@ -1,0 +1,1 @@
+./mfcc_features/8dc18a75_nohash_2.txt right 0.99999 unknown 6.8056e-06 left 6.4569e-07 

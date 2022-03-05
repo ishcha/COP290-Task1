@@ -1,0 +1,1 @@
+./mfcc_features/9be15e93_nohash_3.txt down 0.97198 go 0.026942 unknown 0.00047929 

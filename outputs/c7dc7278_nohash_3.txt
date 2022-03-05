@@ -1,0 +1,1 @@
+./mfcc_features/c7dc7278_nohash_3.txt go 0.51989 no 0.47357 down 0.0056101 

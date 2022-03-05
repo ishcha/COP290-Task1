@@ -1,0 +1,1 @@
+./mfcc_features/d98dd124_nohash_2.txt off 0.99008 up 0.0059498 on 0.002359 

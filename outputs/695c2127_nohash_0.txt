@@ -1,0 +1,1 @@
+./mfcc_features/695c2127_nohash_0.txt on 0.99822 unknown 0.0014229 off 0.00033854 
