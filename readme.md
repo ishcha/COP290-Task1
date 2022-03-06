@@ -23,7 +23,7 @@ What's new in V1.3?
 - Implementation using a shared library containing the audio recognition API
 - **Environment setup**: Before using this audio processing library through its main.cpp file, make sure to set the following environment variable as given.
   - ```LD_LIBRARY_PATH=$cwd:$LD_LIBRARY_PATH``` where cwd is the current working directory
-  - ```MKL_BLAS_PATH=${path-of-MKL-installation}```
+  - ```MKL_BLAS_PATH=${path-of-MKL-installation}``` E.g. The path of our MKL installation- ```MKL_BLAS_PATH = /opt/intel/compilers_and_libraries_2018.2.199/linux/mkl```
 - **How to invoke?**: ./yourcode.out audiosamplefile outputfile. Here, yourcode.out is the executable created to run the shared library, audiosamplefile is the path of the file which contains the extracted audio features (1x250 dimensional vectors). outputfile is the path of the file into which the output of the forward pass computation is written. The output provided informs about the three highest probability labels for the given audio sample features. Each sample's output is organized in the format: <input-file-path> <highest-probability-label> <second-highest-probability-label> <third-highest-probability-label> <highest-probability> <second-highest-probability> <third-highest-probability>
 
 # Helper functions which assist the main forward pass functionality
