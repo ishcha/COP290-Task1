@@ -15,17 +15,11 @@
   - [Probability operations](#probability-operations)
     - [Sigmoid](#sigmoid)
     - [Softmax](#softmax)
-- [Analysis of runtime of various _fullyconnected computation_ implementations](#analysis-of-runtime-of-various-fullyconnected-computation-implementations)
-  - [GNU plots obtained](#gnu-plots-obtained)
-    - [Simple O($n^3$) for-loop based implementation](#simple-on3-for-loop-based-implementation)
-    - [MKL based implementation](#mkl-based-implementation)
-    - [OpenBLAS based implementation](#openblas-based-implementation)
-    - [Pthread based implementation](#pthread-based-implementation)
 
 # Introduction
-Welcome to **Audio Processing Library Version 1.2**. 
+Welcome to **Audio Processing Library Version 1.3**. 
 
-V1.2 supports the following functionalities:
+V1.3 supports the following functionalities:
 - Fully connected forward computation
   - Simple matrix multiplication with O($n^3$) for loop based computations
   - Implementation using Intel MKL library
@@ -35,7 +29,7 @@ V1.2 supports the following functionalities:
 - Max pooling and average pooling operations
 - Sigmoid and Softmax probabilities
 
-What's new in V1.2?
+What's new in V1.3?
 The matrix multiplication operation in the Fully connected forward computation has been accelerated using the following techniques:
 - Implementation using Intel MKL library to provide hardware-based acceleration
 - Implementation using OpenBLAS library
