@@ -1,8 +1,5 @@
 
-for i in {1..5}
+for file in ./mfcc_features/*
 do
-	for file in ./mfcc_features/*
-	do
-	    ./yourcode.out $file ./outputs2/${file##*/}
-	done
+    ./yourcode.out $file ./outputs/output.txt
 done

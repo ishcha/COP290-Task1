@@ -73,7 +73,7 @@ int main(int argc, const char *argv[]) {
         std::cout << "Error sending output to output file. Please check the file path and try again. Aborting.. \n";
         exit(1);
     }
-    std::cout << "Execution completed. Output is at " << argv[2] << '\n';
+    // std::cout << "Execution completed. Output is at " << argv[2] << '\n';
     fout.close();
     delete[] myoutput;
     return 0;

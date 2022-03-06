@@ -4,7 +4,7 @@
 
 CC = g++
 CFLAGS = -g -Wall
-MKL_BLAS_PATH = /opt/intel/compilers_and_libraries_2018.2.199/linux/mkl
+# MKL_BLAS_PATH = /opt/intel/compilers_and_libraries_2018.2.199/linux/mkl
 MKLFLAGS = -fopenmp -m64 -I${MKL_BLAS_PATH}/include -Wl,--no-as-needed -L${MKL_BLAS_PATH}/lib/intel64 -lmkl_intel_lp64 -lmkl_core -lmkl_gnu_thread -lpthread -lm -ldl
 LIBPATH = $(shell pwd)
 
@@ -20,7 +20,7 @@ $(FILE): main.cpp libaudioAPI.so
 libaudioAPI.so: $(OBJS)
 	$(CC) $(CFLAGS) -shared -o libaudioAPI.so $(OBJS) $(MKLFLAGS)
 
-audioAPI.o: audioAPI.cpp audioAPI.h utility.h dnn_weights.h # audioAPI.o binary created
+audioAPI.o: audioAPI.cpp audioAPI.h utility.h constants.h # audioAPI.o binary created
 	$(CC) $(CFLAGS) -c -Werror -fpic audioAPI.cpp
 
 activation.o: activation.cpp utility.h # OK: just compile activation.cpp having relu

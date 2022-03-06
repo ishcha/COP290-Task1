@@ -2,6 +2,7 @@
 #include <iostream>
 #include "audioAPI.h" // remove this later
 #include "utility.h"
+#include "constants.h"
 #include <cstdalign>
 
 pred_t* libaudioAPI(const char* audiofeatures, pred_t* pred) {
@@ -19,6 +20,7 @@ pred_t* libaudioAPI(const char* audiofeatures, pred_t* pred) {
             exit(1);
         }
     }
+    fin.close();
     // apply mkl
     alignas(32) float out1[144];
     if (out1 == NULL) {
@@ -56,9 +58,6 @@ pred_t* libaudioAPI(const char* audiofeatures, pred_t* pred) {
     fc_mkl(out3, 1, 144, wt4, 12, b4, out4);
 
     mysoftmax(out4, 12);
-
-    for(int i=0; i<12; i++)
-        std::cout<<out4[i]<<" ";
 
     // after softmax, pick the highest 3 prob and populate pred_t*
 

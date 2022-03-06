@@ -1,4 +1,3 @@
-#include <cstdio>
 #include "utility.h"
 #include "mkl.h"
 
