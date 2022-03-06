@@ -20,7 +20,7 @@ int main(int argc, const char *argv[]) {
 
     myoutput = libaudioAPI(argv[1], myoutput);
     std::ofstream fout;
-    fout.open(argv[2]);
+    fout.open(argv[2], std::ios_base::app);
     if (!fout) {
         std::cout << "Unable to open file "<< argv[2] << ". Please check the file path and try again. Aborting.. " << '\n';
         exit(1); 
@@ -68,6 +68,10 @@ int main(int argc, const char *argv[]) {
             std::cout << "Error sending output to output file. Please check the file path and try again. Aborting.. \n";
             exit(1);
         }
+    }
+    if (!(fout << '\n')) { 
+        std::cout << "Error sending output to output file. Please check the file path and try again. Aborting.. \n";
+        exit(1);
     }
     std::cout << "Execution completed. Output is at " << argv[2] << '\n';
     fout.close();
