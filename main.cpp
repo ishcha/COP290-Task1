@@ -49,11 +49,11 @@ int main(int argc, const char *argv[]) {
 
     for (int i = 0; i < 3; i++) {
         int label = myoutput[i].label;
-        if (!(fout << labels[label])) { // remember it is int; don't forget to convert to string of label name
+        if (!(fout << labels[label])) { 
             std::cout << "Error sending output to output file. Please check the file path and try again. Aborting.. \n";
             exit(1);
         }
-        if (!(fout << " ")) { // remember it is int; don't forget to convert to string of label name
+        if (!(fout << " ")) { 
             std::cout << "Error sending output to output file. Please check the file path and try again. Aborting.. \n";
             exit(1);
         }
@@ -64,7 +64,7 @@ int main(int argc, const char *argv[]) {
             std::cout << "Error sending output to output file. Please check the file path and try again. Aborting.. \n";
             exit(1);
         }
-        if (!(fout << " ")) { // remember it is int; don't forget to convert to string of label name
+        if (!(fout << " ")) { 
             std::cout << "Error sending output to output file. Please check the file path and try again. Aborting.. \n";
             exit(1);
         }
