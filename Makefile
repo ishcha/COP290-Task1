@@ -33,4 +33,4 @@ fc_mkl.o:fc_mkl.cpp utility.h # OK: just compile fc_mkl.cpp with MKLFLAGS
 	$(CC) $(CFLAGS) -c fc_mkl.cpp $(MKLFLAGS)
 
 clean:
-	rm $(FILE) $(OBJS) 
+	rm $(FILE) $(OBJS) *.so
