@@ -2,8 +2,7 @@
 #include <iostream>
 #include "audioAPI.h" // remove this later
 #include "utility.h"
-// #include "dnn_weights.h"
-
+#include <cstdalign>
 
 pred_t* libaudioAPI(const char* audiofeatures, pred_t* pred) {
     std::ifstream fin;
@@ -12,7 +11,7 @@ pred_t* libaudioAPI(const char* audiofeatures, pred_t* pred) {
         std::cout << "Unable to open file "<< audiofeatures << ". Please check the file path and try again. Aborting.. " << '\n';
         exit(1);
     }
-    float input[250];
+    alignas(32) float input[250];
     // take input
     for (int i = 0; i < 250; i++) {
         if (!(fin >> input[i])) {
@@ -21,7 +20,7 @@ pred_t* libaudioAPI(const char* audiofeatures, pred_t* pred) {
         }
     }
     // apply mkl
-    float* out1 = new float[144];
+    alignas(32) float out1[144];
     if (out1 == NULL) {
         std::cout << "\n ERROR: Can't allocate memory for matrix. Exiting...\n";
         exit(1);
@@ -31,7 +30,7 @@ pred_t* libaudioAPI(const char* audiofeatures, pred_t* pred) {
     myrelu(out1, 144);
 
     // FC2
-    float* out2 = new float[144];
+    alignas(32) float out2[144];
     if (out2 == NULL) {
         std::cout << "\n ERROR: Can't allocate memory for matrix. Exiting...\n";
         exit(1);
@@ -40,7 +39,7 @@ pred_t* libaudioAPI(const char* audiofeatures, pred_t* pred) {
     myrelu(out2, 144);
 
     // FC3
-    float* out3 = new float[144];
+    alignas(32) float out3[144];
     if (out3 == NULL) {
         std::cout << "\n ERROR: Can't allocate memory for matrix. Exiting...\n";
         exit(1);
@@ -49,7 +48,7 @@ pred_t* libaudioAPI(const char* audiofeatures, pred_t* pred) {
     myrelu(out3, 144);
 
     //FC4
-    float* out4 = new float[12];
+    alignas(32) float out4[12];
     if (out4 == NULL) {
         std::cout << "\n ERROR: Can't allocate memory for matrix. Exiting...\n";
         exit(1);
@@ -57,6 +56,9 @@ pred_t* libaudioAPI(const char* audiofeatures, pred_t* pred) {
     fc_mkl(out3, 1, 144, wt4, 12, b4, out4);
 
     mysoftmax(out4, 12);
+
+    for(int i=0; i<12; i++)
+        std::cout<<out4[i]<<" ";
 
     // after softmax, pick the highest 3 prob and populate pred_t*
 
@@ -87,9 +89,5 @@ pred_t* libaudioAPI(const char* audiofeatures, pred_t* pred) {
         pred[i].label = idx[i];
         pred[i].prob = maxa[i];
     }
-    delete[] out1;
-    delete[] out2;
-    delete[] out3;
-    delete[] out4;
     return pred;
 }
