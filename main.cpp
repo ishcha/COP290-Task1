@@ -3,30 +3,34 @@
 #include <fstream>
 #include <iomanip>
 
-using namespace std;
-int main(int argc, char const *argv[]) {
+int main(int argc, const char *argv[]) {
     if (argc < 3) {
-        cout << "Insufficient number of arguments. Please check the command syntax. Aborting... \n";
+        std::cout << "Insufficient number of arguments. Please check the command syntax. Aborting... \n";
         exit(1);
     }
     if (argc > 3) {
-        cout << "Too many arguments. Please check the command syntax. Aborting... \n";
+        std::cout << "Too many arguments. Please check the command syntax. Aborting... \n";
         exit(1);
     }
-    pred_t* myoutput = new pred_t();
+    pred_t* myoutput = new pred_t[3];
+    if (myoutput == NULL) {
+        std::cout << "\n ERROR: Can't allocate memory for matrix. Exiting...\n";
+        exit(1);
+    }
+
     myoutput = libaudioAPI(argv[1], myoutput);
-    ofstream fout;
+    std::ofstream fout;
     fout.open(argv[2]);
     if (!fout) {
-        cout << "Unable to open file "<< argv[2] << ". Please check the file path and try again. Aborting.. " << '\n';
+        std::cout << "Unable to open file "<< argv[2] << ". Please check the file path and try again. Aborting.. " << '\n';
         exit(1); 
     }
     if (!(fout << argv[1])) {
-        cout << "Error sending output to output file. Please check the file path and try again. Aborting.. \n";
+        std::cout << "Error sending output to output file. Please check the file path and try again. Aborting.. \n";
         exit(1);
     }
     if (!(fout << " ")) { // remember it is int; don't forget to convert to string of label name
-        cout << "Error sending output to output file. Please check the file path and try again. Aborting.. \n";
+        std::cout << "Error sending output to output file. Please check the file path and try again. Aborting.. \n";
         exit(1);
     }
     const char* labels[12];
@@ -44,26 +48,27 @@ int main(int argc, char const *argv[]) {
     labels[11] = "go";
 
     for (int i = 0; i < 3; i++) {
-        int label = (myoutput+i)->label;
-        float prob = (myoutput+i)->prob;
+        int label = myoutput[i].label;
+        float prob = myoutput[i].prob;
         if (!(fout << labels[label])) { // remember it is int; don't forget to convert to string of label name
-            cout << "Error sending output to output file. Please check the file path and try again. Aborting.. \n";
+            std::cout << "Error sending output to output file. Please check the file path and try again. Aborting.. \n";
             exit(1);
         }
         if (!(fout << " ")) { // remember it is int; don't forget to convert to string of label name
-            cout << "Error sending output to output file. Please check the file path and try again. Aborting.. \n";
+            std::cout << "Error sending output to output file. Please check the file path and try again. Aborting.. \n";
             exit(1);
         }
-        if (!(fout << setprecision(5) << prob)) {
-            cout << "Error sending output to output file. Please check the file path and try again. Aborting.. \n";
+        if (!(fout << std::setprecision(6) << prob)) {
+            std::cout << "Error sending output to output file. Please check the file path and try again. Aborting.. \n";
             exit(1);
         }
         if (!(fout << " ")) { // remember it is int; don't forget to convert to string of label name
-            cout << "Error sending output to output file. Please check the file path and try again. Aborting.. \n";
+            std::cout << "Error sending output to output file. Please check the file path and try again. Aborting.. \n";
             exit(1);
         }
     }
-    cout << "Execution completed. Output is at " << argv[2] << '\n';
+    std::cout << "Execution completed. Output is at " << argv[2] << '\n';
     fout.close();
+    delete[] myoutput;
     return 0;
 }

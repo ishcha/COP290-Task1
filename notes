@@ -9,3 +9,53 @@
 MKL assumptions
 MKL: float* (row major): output
 input: float* input, weights, biases (row major) 
+
+Before submission unset/comment MKL_BLAS_PATH
+
+time mkl_malloc and normal implementation     (done)
+bulk timing   
+
+mkl multithreading          (done)
+"By default, Intel MKL uses n threads, where n is the number of physical cores on the system"
+
+optimize min/max   (done)
+
+check the outputs  (done)
+
+export --> NOT POSSIBLE       (done)
+
+
+1 . instead of making res in fc_mkl pass a float pointer to be modified (freeing memory)
+2. using namespace std isn't a good practice.
+3. extern in audioAPI.cpp
+4. Added delete[] statements
+5. setprecision(6)
+
+
+normal (5 runs)
+real	0m9.196s
+user	0m4.757s
+sys	0m2.063s
+
+real	0m2.383s  (removed prints)
+user	0m1.728s
+sys	0m1.149s
+
+
+mkl_malloc (5 runs)
+real	0m9.195s
+user	0m4.538s
+sys	0m2.140s
+
+real	0m8.315s
+user	0m4.158s
+sys	0m1.787s
+
+real	0m2.165s  (removed print statements)
+user	0m1.689s
+sys	0m0.918s
+
+
+
+
+
